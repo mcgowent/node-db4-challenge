@@ -4,7 +4,7 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true, // needed for sqlite
     connection: {
-      filename: './data/schemes.db3',
+      filename: './data/schemes.db3', // Copy and Pasted but forgot to remame...lol recipe data base is now called schemes, oops
     },
     migrations: {
       directory: './data/migrations'

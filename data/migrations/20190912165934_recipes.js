@@ -20,6 +20,7 @@ exports.up = function (knex) {
                 .notNullable()
                 .unique()
         })
+
         .createTable('recipes_ingredients', tbl => {
             tbl
                 .integer('recipe_id')
@@ -42,6 +43,7 @@ exports.up = function (knex) {
             tbl.primary(['recipe_id', 'ingredients_id']) // Sets the Primary key for the table to the unique combo of recipes and ingredients
 
         })
+
         .createTable('instructions', tbl => {
             // tbl.increments('id')
 

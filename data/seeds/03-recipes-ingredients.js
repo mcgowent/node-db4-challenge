@@ -11,4 +11,3 @@ exports.seed = function (knex, Promise) {
         { recipe_id: 3, ingredients_id: 5, quantity: .4 },
     ]);
 };
-
