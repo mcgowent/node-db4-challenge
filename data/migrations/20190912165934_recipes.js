@@ -6,7 +6,7 @@ exports.up = function (knex) {
             tbl.increments() // Sets up recipe Primary Key
 
             tbl  // Name of Recipe, can not be left blank, must be unique
-                .string('name', 125)
+                .string('name', 50)
                 .notNullable()
                 .unique()
         })
@@ -20,7 +20,7 @@ exports.up = function (knex) {
                 .notNullable()
                 .unique()
         })
-        .creatTable('recipes_ingredients', tbl => {
+        .createTable('recipes_ingredients', tbl => {
             tbl
                 .integer('recipe_id')
                 .unsigned()
@@ -36,14 +36,14 @@ exports.up = function (knex) {
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE')
             tbl
-                .float('quantity')
+                .decimal('quantity')
                 .notNullable()
 
             tbl.primary(['recipe_id', 'ingredients_id']) // Sets the Primary key for the table to the unique combo of recipes and ingredients
 
         })
         .createTable('instructions', tbl => {
-            tbl.increments()
+            // tbl.increments('id')
 
             tbl
                 .integer('recipe_id')
@@ -52,6 +52,18 @@ exports.up = function (knex) {
                 .inTable('recipes')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE')
+
+            tbl
+                .integer('steps_number')
+                .unsigned()
+                .notNullable()
+
+            tbl
+                .string('instructions', 2000)
+                .notNullable()
+
+            tbl
+                .primary(['recipe_id', 'steps_number'])
         })
 };
 
@@ -60,5 +72,5 @@ exports.down = function (knex) {
         .dropTableIfExists('recipes')
         .dropTableIfExists('ingredients')
         .dropTableIfExists('recipes_ingredients')
-        .dropTableIfExists('instructions')
+        .dropTableIfExists('instructions');
 };
